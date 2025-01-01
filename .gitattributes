@@ -1,0 +1,3 @@
+data house_env notebooks readme.md requirements.txt src text=auto
+*.pyi text eol=lf
+*.py text eol=lf

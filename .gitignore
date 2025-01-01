@@ -1,0 +1,62 @@
+# Virtual Environment
+house_env/
+
+# Python-specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook Checkpoints
+.notebooks_checkpoints/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment Variables
+.env
+*.env
+
+# Data directories (ignore raw/processed data but keep the extracted_data folder)
+data/processed/
+data/raw/
+
+# Ignore specific files in root
+*.sqlite3
+*.db
+
+# Ignore compiled code
+build/
+dist/
+*.o
+*.out
+*.class
+*.so
+
+# Ignore dependencies and package-lock files
+package-lock.json
+yarn.lock
+pip-wheel-metadata/
+*.lock
+
+# Git-specific
+*.orig
+*.rej
+*.patch
