@@ -6,8 +6,6 @@ from typing import Tuple
 import os 
 import zipfile 
 
-
-
 class BaseIngestion(ABC):
     """This is an abstract class to ingest the data"""
     @abstractmethod
@@ -66,11 +64,18 @@ class Ingestor:
             raise
 
 if __name__ == "__main__":
-    source_path = r"D:\Machine Learning\Projects\house_price_prediction_2.0\data\raw\archive.zip"
-    extracted_path = r"D:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data"
+    source_path = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\raw\archive.zip"
+    extracted_path = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data"
+    ex = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data\AmesHousing.csv"
     ing = Ingestor(source_path, extracted_path)
     try:
         df = ing.ingest_data()
-        print(df.head())
+        missing_values = ["NA", "N/A", "null", "?", "0", "999", "None"]
+        # Step 4: Replace Missing Value Representations with NaN
+        df.replace(missing_values, pd.NA, inplace=True)
+        # Step 5: Verify Null Values After Replacement
+        df.to_csv(ex, index=False)
+
     except Exception as e:
         logging.error(f"Failed to ingest data: {e}")
+        
