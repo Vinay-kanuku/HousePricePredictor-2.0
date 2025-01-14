@@ -2,9 +2,12 @@ from abc import ABC, abstractmethod
 import pandas as pd 
 import numpy as np 
 import seaborn as sns 
+import plotly.express as px 
 import matplotlib.pyplot as plt 
 import plotly.express as px
 import logging 
+
+
 # from src.data_ingestion.data_loader import DataLoader
 
 class UnivariateAnalyser(ABC):
@@ -255,12 +258,12 @@ class Analysis:
     def handle(self):
         description = self._strategy.analyse(self._feature)
         print(description)
-        # self._strategy.visualise(self._feature)
+        self._strategy.visualise(self._feature)
         # self._strategy.visualise_outliers(self._feature)
-        self._strategy.visualise_missing_data(self._feature)
+        # self._strategy.visualise_missing_data(self._feature)
         
 if __name__ == "__main__":
-    path = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data\AmesHousing.csv"
+    path = r"/home/vinay/Code/Machine Learning/HousePricePredictor-2.0/data/extracted_data/AmesHousing.csv"
 
     df = pd.read_csv(path)
     placeholders = ["NA", "None", "null", "", "NaN", "n/a", "N/A"]
