@@ -248,32 +248,33 @@ class UnivariateCategoricalAnalyser(UnivariateAnalyser):
  
 
 class Analysis:
-    def __init__(self, strategy:UnivariateAnalyser, feature:pd.Series):
+    def __init__(self, strategy:UnivariateAnalyser ):
         self._strategy = strategy
-        self._feature = feature 
+       
 
     def set_strategy(self, strategy:UnivariateAnalyser):
         self._strategy = strategy
 
-    def handle(self):
-        description = self._strategy.analyse(self._feature)
-        print(description)
-        self._strategy.visualise(self._feature)
+    def handle(self, feature):
+        # description = self._strategy.analyse(self._feature)
+        # print(description)
+        self._strategy.visualise( feature)
         # self._strategy.visualise_outliers(self._feature)
         # self._strategy.visualise_missing_data(self._feature)
         
 if __name__ == "__main__":
-    path = r"/home/vinay/Code/Machine Learning/HousePricePredictor-2.0/data/extracted_data/AmesHousing.csv"
+    path = r"/home/vinay/code/Machine_Learning/HousePricePredictor-2.0/data/extracted_data/AmesHousing.csv"
 
     df = pd.read_csv(path)
-    placeholders = ["NA", "None", "null", "", "NaN", "n/a", "N/A"]
-    # Apply a replacement across the entire dataframe
-    df.replace(placeholders, np.nan, inplace=True)
+    # placeholders = ["NA", "None", "null", "", "NaN", "n/a", "N/A"]
+    # # Apply a replacement across the entire dataframe
+    # df.replace(placeholders, np.nan, inplace=True)
     feature = 'SalePrice'
-    ana = Analysis(UnivariateNumericalAnalyser(), df[feature])
-    # ana.set_strategy(UnivariateCategoricalAnalyser())
-    des = ana.handle()
-    print(des)
+    ana = Analysis(UnivariateNumericalAnalyser())
+    # ana.handle(df[feature])
+    for fea in df.select_dtypes(include=['int64', 'float64']).columns[10:15]:
+        ana.handle(df[fea])
+       
    
 
 

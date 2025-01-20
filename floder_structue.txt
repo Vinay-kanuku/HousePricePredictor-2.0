@@ -1,49 +1,58 @@
-
-HousePricePrediction/
+house_price_predictor/
 │
-├── data/                  # Raw and processed datasets
-│   ├── raw/               # Raw, unmodified data files
-│   ├── processed/         # Cleaned and transformed datasets
-│   └── extracted_data/    # Intermediate feature-engineered files
+├── .dockerignore
+├── .gitignore
+├── Dockerfile
+├── README.md
+├── requirements.txt
+├── setup.py
 │
-├── notebooks/             # Jupyter notebooks for exploratory analysis
-│   ├── eda.ipynb          # Exploratory Data Analysis notebook
-│   ├── feature_analysis.ipynb  # Feature engineering and analysis
+├── config/
+│   ├── config.yaml         # Configuration for the project (e.g., paths, hyperparameters)
+│   ├── feature_config.yaml # Feature engineering configs
+│   ├── model_config.yaml   # Model training configs
 │
-├── analysis/              # Analysis scripts
-│   ├── analyze_src/       # Source code for analysis
-│   │   ├── eda.py         # EDA script
-│   │   └── multivariate_analysis.py  # Multivariate analysis module
-│   └── __init__.py        # Makes this a Python package
+├── data/                   # Data storage
+│   ├── raw/                # Raw input data
+│   ├── interim/            # Preprocessed data
+│   ├── processed/          # Final cleaned data for modeling
+│   ├── external/           # External datasets or additional resources
 │
-├── src/                   # Source code for model building and pipelines
-│   ├── data_ingestion/    # Scripts for loading and preprocessing data
-│   │   ├── ingest_data.py # Load raw data into pipeline
-│   │   └── preprocess.py  # Clean and transform data
-│   ├── feature_engineering/  # Scripts for feature extraction
-│   │   └── create_features.py
-│   ├── model_training/    # Training-related code
-│   │   ├── train_model.py # Model training and hyperparameter tuning
-│   │   └── evaluate.py    # Model evaluation metrics
-│   ├── pipelines/         # ZenML pipeline definitions
-│   │   ├── train_pipeline.py  # Training pipeline
-│   │   ├── predict_pipeline.py  # Prediction pipeline
-│   │   └── utils.py       # Helper functions for pipelines
-│   └── __init__.py        # Makes this a Python package
+├── notebooks/              # Jupyter notebooks for experimentation
+│   ├── eda.ipynb           # Exploratory data analysis
+│   ├── feature_analysis.ipynb
 │
-├── tests/                 # Unit and integration tests
-│   ├── test_data/         # Tests for data ingestion and cleaning
-│   ├── test_features/     # Tests for feature engineering
-│   ├── test_pipelines/    # Tests for pipeline components
+├── src/                    # Source code for the project
+│   ├── __init__.py
+│   │
+│   ├── data/               # Data-related scripts
+│   │   ├── __init__.py
+│   │   ├── data_loader.py  # Handles data loading
+│   │   ├── data_cleaning.py# Cleans and preprocesses data
+│   │   ├── ingest_data.py  # Handles ingestion pipelines
+│   │
+│   ├── features/           # Feature engineering scripts
+│   │   ├── __init__.py
+│   │   ├── feature_eng.py  # Feature engineering steps
+│   │   ├── feature_selection.py # Handles feature elimination
+│   │
+│   ├── models/             # Scripts for modeling
+│   │   ├── __init__.py
+│   │   ├── train_model.py  # Training logic
+│   │   ├── evaluate_model.py # Evaluation metrics
+│   │
+│   ├── pipelines/          # ZenML pipelines
+│   │   ├── __init__.py
+│   │   ├── data_pipeline.py # Pipeline for data processing
+│   │   ├── train_pipeline.py # Pipeline for training
+│   │
+│   ├── utils/              # Utility functions
+│       ├── __init__.py
+│       ├── helpers.py      # Common helpers
+│       ├── logger.py       # Logging utility
 │
-├── zenml_artifacts/       # ZenML artifacts generated during pipeline execution
-│   ├── pipelines/         # Pipeline execution outputs
-│   ├── models/            # Stored trained models
+├── tests/                  # Test scripts
+│   ├── test_data_loader.py # Unit tests for data loader
+│   ├── test_train_model.py # Unit tests for model training
 │
-├── config/                # Configuration files
-│   ├── pipeline_config.yaml  # Configurations for ZenML pipelines
-│   ├── model_params.yaml     # Hyperparameters for models
-│
-├── requirements.txt       # Python dependencies
-├── README.md              # Project overview and instructions
-└── .gitignore             # Files and directories to ignore in version control
+└── .zenml/                 # ZenML-related metadata

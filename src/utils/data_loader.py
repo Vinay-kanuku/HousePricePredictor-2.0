@@ -5,19 +5,17 @@ import os
 import numpy as np 
 
 class DataLoader:  
-    def __init__(self, path:str):
-        self._path = path
 
-    def load_data(self) -> pd.DataFrame:
+    def load_data(self, path) -> pd.DataFrame:
         """
-        This method retuns the data frame by taking the path
+        This method retuns the DataFrame 
         args: path
         returns: DataFrame
 
         """
         try:
-            if os.path.exists(path=self._path):
-                df = pd.read_csv(self._path) 
+            if os.path.exists(path=path):
+                df = pd.read_csv(path) 
                 return df
             else:
                 raise FileNotFoundError(f"No such file is found.")

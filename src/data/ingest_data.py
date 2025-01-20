@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from abc import ABC, abstractmethod
 import numpy as np 
 import pandas as pd 
@@ -5,6 +7,8 @@ import logging
 from typing import Tuple 
 import os 
 import zipfile 
+from config.config_manager import ConfigManager
+
 
 class BaseIngestion(ABC):
     """This is an abstract class to ingest the data"""
@@ -64,17 +68,21 @@ class Ingestor:
             raise
 
 if __name__ == "__main__":
-    source_path = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\raw\archive.zip"
-    extracted_path = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data"
-    ex = r"E:\Machine Learning\Projects\house_price_prediction_2.0\data\extracted_data\AmesHousing.csv"
-    ing = Ingestor(source_path, extracted_path)
+
+    config = ConfigManager()
+    source_path = config.get_path("raw_data")
+    interm_path = config.get_path("interim_data")
+    csv_path = os.path.join(interm_path, 'AmesHousing.csv')
+
+    
+    ing = Ingestor(source_path, interm_path)
     try:
         df = ing.ingest_data()
         missing_values = ["NA", "N/A", "null", "?", "0", "999", "None"]
         # Step 4: Replace Missing Value Representations with NaN
         df.replace(missing_values, pd.NA, inplace=True)
         # Step 5: Verify Null Values After Replacement
-        df.to_csv(ex, index=False)
+        df.to_csv(csv_path, index=False)
 
     except Exception as e:
         logging.error(f"Failed to ingest data: {e}")

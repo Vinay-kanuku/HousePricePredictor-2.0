@@ -1,0 +1,9 @@
+paths:
+  interim_data: data/interim/
+  raw_data:  data/raw/archive.zip
+  processed_data:  None 
+
+settings:
+  model_name: HousePricePredictor
+  train_test_split: 0.8
+  random_seed: 42

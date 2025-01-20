@@ -34,13 +34,13 @@ Thumbs.db
 .env
 *.env
 
-# Data directories (ignore raw/processed data but keep the extracted_data folder)
-data/processed/
+# Data directories
 data/raw/
+data/interim/
+data/processed/
 
-# Ignore specific files in root
-*.sqlite3
-*.db
+# Notebooks and checkpoints
+notebooks/*.ipynb_checkpoints/
 
 # Ignore compiled code
 build/
@@ -50,15 +50,39 @@ dist/
 *.class
 *.so
 
-# Ignore dependencies and package-lock files
+# Dependencies and package-lock files
+pip-wheel-metadata/
 package-lock.json
 yarn.lock
-pip-wheel-metadata/
 *.lock
+
+# Test artifacts
+tests/__pycache__/
+tests/*.log
+
+# ZenML metadata
+.zenml/
+
+# Docker files
+*.dockerignore
+docker-compose.override.yml
 
 # Git-specific
 *.orig
 *.rej
 *.patch
 
- 
+# Ignore generated files and caches
+*.sqlite3
+*.db
+*.cache
+
+# Ignore compiled artifacts
+src/**/*.pyc
+src/**/*.pyo
+src/**/*.pyd
+
+# Miscellaneous
+*.tar.gz
+*.zip
+*.whl
